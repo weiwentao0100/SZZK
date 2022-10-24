@@ -71,16 +71,50 @@ class TestCase:
             "Content-Type": "application/json"
         }
         data = {
-            "contractId": self.add_contract(),
-            "amount": 55,
-            "name": "钢丝",
-            "remark": "钢丝采购",
-            "spec": "100mm",
-            "unit": "吨",
-            "unitPrice": 99
+            "contractId": self.add_contract(),  # 合同ID
+            "amount": 55,  # 数量
+            "name": "钢丝",  # 采购内容
+            "remark": "钢丝采购",  # 备注
+            "spec": "100mm",  # 规格
+            "unit": "吨",  # 单位
+            "unitPrice": 99  # 单价
         }
         response = self.request.post(url, headers=headers, json=data)
+        self.assert_util.assert_code(response['code'], 200)
         print(response['body'])
+
+    def add_project(self):
+        """ 新增项目 """
+        url = self.host + "/admin/project/add"
+        headers = {
+            "Authorization": self.get_token(),
+            "Content-Type": "application/json"
+        }
+        data = {
+            "name": "文涛的测试项目_05",  # 项目名称
+            "contractId": 67,  # 合同ID
+            "projectStartDate": self.time,  # 项目开始时间
+            "projectEndDate": "2022-11-05",  # 项目结束时间
+            "chargePersonDate": "2022-10-25",  # 项目总负责人完成时间
+            "chargePersonIds": "13041141,13041048",  # 项目总负责人ID
+            "designerDate": "2022-10-26",  # 设计完工时间
+            "designerIds": "13041141,13041048",  # 设计人员ID
+            "productionPreparationDate": "2022-10-27",  # 生产准备部完工时间
+            "productionPreparationIds": "13041141,13041048",  # 生产准备部人员ID
+            "purchaserDate": "2022-10-28",  # 采购完工时间
+            "purchaserIds": "13041141,13041048",  # 采购人员ID
+            "machiningDate": "2022-10-29",  # 加工完工时间
+            "machiningIds": "13041141,13041048",  # 加工队伍人员ID
+            "supplierDate": "2022-10-30",  # 供应商完工时间
+            "supplierIds": "13041157",  # 供应商ID
+            "rawMaterialManagerDate": "2022-10-31",  # 原材料/仓库管理员完工时间
+            "rawMaterialManagerIds": "13041141,13041048",  # 原材料/仓库管理员ID
+            "siteServiceDate": "2022-10-31",  # 现场服务完工时间
+            "siteServiceIds": "13041141,13041048",  # 现场服务人员ID
+            "logisticsDate": "2022-11-01",  # 物流完工时间
+            "logisticsIds": "13041158",  # 物流人员ID
+            "illustrate": "这里是项目的说明"  # 项目说明
+        }
 
     def get_contract_list(self):
         """ 获取合同列表 """

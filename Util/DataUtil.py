@@ -6,8 +6,8 @@ class SetUtil:
     def setup_autonumber(self):
         """ 创建自增变量number """
         with open("/Users/weiwentao/wentao_test/SZZK/data/number.txt", "r+") as f:
-            number = f.readline()
-            auto_number = int(number) + 1
+            _number = f.readline()
+            auto_number = int(_number) + 1
             f.seek(0)
             f.truncate()
             f.write(str(auto_number))
