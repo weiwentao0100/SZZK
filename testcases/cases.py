@@ -1,6 +1,8 @@
-from Util.RequestUtil import Request
+import requests
+
 from Util.AssertUtil import AssertUtil
 from Util.DataUtil import SetUtil
+from Util.RequestUtil import Request
 
 
 class TestCase:
@@ -62,6 +64,8 @@ class TestCase:
             return contract_id
         except:
             print("未取到合同ID，请检查请求参数是否正确！")
+        # contract_id = response['body']['data']
+        # return contract_id
 
     def add_supplyList(self):
         """ 新增供货清单 """
@@ -81,7 +85,7 @@ class TestCase:
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_code(response['code'], 200)
-        print(f"供货清单新增成功，采购内容为：{data['name']}")
+        print(f"供货清单新增成功，采购内容为：{data['name']}, 返回body: {response['body']}")
 
     def add_project(self):
         """ 新增项目 """
@@ -135,4 +139,4 @@ class TestCase:
 
 if __name__ == '__main__':
     testcase = TestCase("https://test12.ahweimeng.cn")
-    testcase.add_project()
+    testcase.add_supplyList()

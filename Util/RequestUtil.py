@@ -3,7 +3,7 @@ import requests
 
 class Request:  # 创建类
     # def __init__(self):
-    #     self.log = my_log("Requests")
+    #     self.request = requests.session()
 
     def request_api(self, url, json=None, params=None, data=None, headers=None, cookies=None, method="get"):  # 定义公共方法
         # 增加请求方法的参数method 通过参数判断get或post请求
@@ -36,5 +36,5 @@ class Request:  # 创建类
 
 if __name__ == '__main__':
     request = Request()
-    response = request.get("https://www.baidu.com")
+    response = request.get("https://www.runoob.com/")
     print(response.get('body'))
