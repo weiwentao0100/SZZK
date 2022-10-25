@@ -14,13 +14,20 @@ class SetUtil:
         return str(auto_number)
 
     def setup_datetime(self):
-        """ 生成当天日期 """
-        time = datetime.date.today()
-        return str(time)
+        """ 生成项目各角色的完工日期 """
+        time = datetime.datetime.now()
+        time_list = [i for i in range(11)]
+        days_difference = []
+        for i in time_list:
+            time_difference = time + datetime.timedelta(days=i)
+            everyday_time = time_difference.strftime('%Y-%m-%d')
+            days_difference.append(everyday_time)
+        return days_difference
 
 
 if __name__ == '__main__':
     setutil = SetUtil()
-    number = setutil.setup_autonumber()
-    print("文涛的测试合同_1" + number)
+    setutil.setup_datetime()
+
+
 

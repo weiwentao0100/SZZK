@@ -53,7 +53,7 @@ class TestCase:
             "retentionMoney": 2,
             "secondPartyName": "北京世卓泽坤科技有限公司",
             "signPlace": "上海市宝山区中成智谷",
-            "signTime": self.time
+            "signTime": self.time[0]
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_code(response['code'], 200)
@@ -81,7 +81,7 @@ class TestCase:
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_code(response['code'], 200)
-        print(response['body'])
+        print(f"供货清单新增成功，采购内容为：{data['name']}")
 
     def add_project(self):
         """ 新增项目 """
@@ -91,30 +91,33 @@ class TestCase:
             "Content-Type": "application/json"
         }
         data = {
-            "name": "文涛的测试项目_05",  # 项目名称
-            "contractId": 67,  # 合同ID
-            "projectStartDate": self.time,  # 项目开始时间
-            "projectEndDate": "2022-11-05",  # 项目结束时间
-            "chargePersonDate": "2022-10-25",  # 项目总负责人完成时间
+            "name": "文涛的测试项目_" + self.number,  # 项目名称
+            "contractId": self.add_contract(),  # 合同ID
+            "projectStartDate": self.time[0],  # 项目开始时间
+            "projectEndDate": self.time[10],  # 项目结束时间
+            "chargePersonDate": self.time[1],  # 项目总负责人完成时间
             "chargePersonIds": "13041141,13041048",  # 项目总负责人ID
-            "designerDate": "2022-10-26",  # 设计完工时间
+            "designerDate": self.time[2],  # 设计完工时间
             "designerIds": "13041141,13041048",  # 设计人员ID
-            "productionPreparationDate": "2022-10-27",  # 生产准备部完工时间
+            "productionPreparationDate": self.time[3],  # 生产准备部完工时间
             "productionPreparationIds": "13041141,13041048",  # 生产准备部人员ID
-            "purchaserDate": "2022-10-28",  # 采购完工时间
+            "purchaserDate": self.time[4],  # 采购完工时间
             "purchaserIds": "13041141,13041048",  # 采购人员ID
-            "machiningDate": "2022-10-29",  # 加工完工时间
+            "machiningDate": self.time[5],  # 加工完工时间
             "machiningIds": "13041141,13041048",  # 加工队伍人员ID
-            "supplierDate": "2022-10-30",  # 供应商完工时间
+            "supplierDate": self.time[6],  # 供应商完工时间
             "supplierIds": "13041157",  # 供应商ID
-            "rawMaterialManagerDate": "2022-10-31",  # 原材料/仓库管理员完工时间
+            "rawMaterialManagerDate": self.time[7],  # 原材料/仓库管理员完工时间
             "rawMaterialManagerIds": "13041141,13041048",  # 原材料/仓库管理员ID
-            "siteServiceDate": "2022-10-31",  # 现场服务完工时间
+            "siteServiceDate": self.time[8],  # 现场服务完工时间
             "siteServiceIds": "13041141,13041048",  # 现场服务人员ID
-            "logisticsDate": "2022-11-01",  # 物流完工时间
+            "logisticsDate": self.time[9],  # 物流完工时间
             "logisticsIds": "13041158",  # 物流人员ID
             "illustrate": "这里是项目的说明"  # 项目说明
         }
+        response = self.request.post(url, headers=headers, json=data)
+        self.assert_util.assert_code(response['code'], 200)
+        print(f"项目创建成功，项目名称：{data['name']}")
 
     def get_contract_list(self):
         """ 获取合同列表 """
@@ -132,4 +135,4 @@ class TestCase:
 
 if __name__ == '__main__':
     testcase = TestCase("https://test12.ahweimeng.cn")
-    testcase.add_supplyList()
+    testcase.add_project()
