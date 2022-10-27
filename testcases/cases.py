@@ -86,7 +86,7 @@ class TestCase:
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_in_body(response['code'], "'code': 0")
-        print(f"供货清单新增成功，采购内容为：{data['name']}, 返回body: {response['body']}")
+        print(f"供货清单新增成功，采购内容为：{data['name']}")
 
     def add_two_supplyList(self):
         """ 新增供货清单 """
@@ -106,7 +106,7 @@ class TestCase:
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_in_body(response['code'], "'code': 0")
-        print(f"供货清单新增成功，采购内容为：{data['name']}, 返回body: {response['body']}")
+        print(f"供货清单新增成功，采购内容为：{data['name']}")
 
     def add_project(self):
         """ 新增项目 """
@@ -131,7 +131,7 @@ class TestCase:
             "machiningDate": self.time[5],  # 加工完工时间
             "machiningIds": "13041048,13041141,13041082",  # 加工队伍人员ID
             "supplierDate": self.time[6],  # 供应商完工时间
-            "supplierIds": "13041050,13041157,13041118",  # 供应商ID
+            "supplierIds": "13041050,13041166,13041118",  # 供应商ID
             "rawMaterialManagerDate": self.time[7],  # 原材料/仓库管理员完工时间
             "rawMaterialManagerIds": "13041141,13041048,13041082",  # 原材料/仓库管理员ID
             "siteServiceDate": self.time[8],  # 现场服务完工时间
@@ -142,7 +142,7 @@ class TestCase:
         }
         response = self.request.post(url, headers=headers, json=data)
         self.assert_util.assert_in_body(response['code'], "'code': 40000")
-        print(f"项目创建成功，项目名称：{data['name']}, 返回body: {response['body']}")
+        print(f"项目创建成功，项目名称：{data['name']}")
 
     def get_contract_list(self):
         """ 获取合同列表 """
@@ -156,8 +156,3 @@ class TestCase:
         }
         response = self.request.get(url, headers=headers, params=data)
         print(response['body']['data'])
-
-
-if __name__ == '__main__':
-    testcase = TestCase("https://test12.ahweimeng.cn")
-    testcase.add_supplyList()
