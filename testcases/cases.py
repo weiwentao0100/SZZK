@@ -19,6 +19,8 @@ class TestCase:
         self.number = SetUtil().setup_autonumber()
         self.time = SetUtil().setup_datetime()
         self.contract_id = self.add_contract()
+        self.project_name = "文涛的测试项目_"
+        self.contract_name = "文涛的测试合同_"
 
     def get_token(self):
         """ 获取用户token """
@@ -48,7 +50,7 @@ class TestCase:
             "contractUrl": "https://wmeimob-frame.oss-cn-shanghai.aliyuncs.com/juduo_temp/b562b38e-08cd-6698-536a-dcf72f8f77b7.pdf",
             "firstPartyName": "上海惊鹿",
             "firstPartyPersonChargeIds": "13041151",
-            "name": "文涛的测试合同_1" + self.number,
+            "name": self.contract_name + self.number,
             "operationFunds": 3,
             "outCode": "WBHT_TEST_1" + self.number,
             "paymentReceived": 3,
@@ -116,7 +118,7 @@ class TestCase:
             "Content-Type": "application/json"
         }
         data = {
-            "name": "文涛的测试项目_1" + self.number,  # 项目名称
+            "name": self.project_name + self.number,  # 项目名称
             "contractId": self.contract_id,  # 合同ID
             "projectStartDate": self.time[0],  # 项目开始时间
             "projectEndDate": self.time[10],  # 项目结束时间
